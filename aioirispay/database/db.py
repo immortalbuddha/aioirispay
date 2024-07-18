@@ -2,8 +2,10 @@ import json
 import os
 import datetime
 
+database_path = os.path.dirname(os.path.abspath(__file__))
+
 class Database:
-    def __init__(self, path: str = "aioirispay/database/db.json"):
+    def __init__(self, path: str = f"{database_path}/db.json"):
         self.path = path
         self.data = {}
         self.load()
@@ -13,7 +15,8 @@ class Database:
             with open(self.path, "r") as f:
                 self.data = json.load(f)
         else:
-            print("File not found.")
+            os.makedirs(self.path)
+            self.load()
 
     def get(self, owner: str, key: str, default):
         if owner in self.data:

@@ -1,4 +1,4 @@
 from .core import IrisPay
-from .database.db import Database
+from .database import Database
 
 __all__ = ["IrisPay", "Database"]

@@ -15,8 +15,11 @@ class Database:
             with open(self.path, "r") as f:
                 self.data = json.load(f)
         else:
-            os.makedirs(self.path)
-            self.load()
+            try:
+                with open(self.path, "x") as f:
+                    self.data = {}
+            except:
+                self.load()
 
     def get(self, owner: str, key: str, default):
         if owner in self.data:
